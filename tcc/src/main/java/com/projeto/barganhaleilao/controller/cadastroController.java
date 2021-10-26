@@ -10,20 +10,19 @@ import com.projeto.barganhaleilao.model.CadProduto;
 import com.projeto.barganhaleilao.repository.Produtos;
 
 @Controller
-@RequestMapping("/cadastroObjeto")
 public class cadastroController {
 	
 	@Autowired
 	private Produtos produtos;
 	
-	@RequestMapping("/novo")
+	@RequestMapping("/cadastroObjeto/novo")
 	public String novo() {
 		return "CadastroObjeto";
 	}
 	
-	@RequestMapping(method = RequestMethod.POST)
+	@RequestMapping(value="/cadastroObjeto", method = RequestMethod.POST)
 	public ModelAndView salvar(CadProduto cadProduto) {
-		ModelAndView mv =new ModelAndView("cadastroObjeto");
+		ModelAndView mv =new ModelAndView("CadastroObjeto");
 		produtos.save(cadProduto);
 		mv.addObject("mensagem", "Produto salvo com sucesso!");
 		return mv;

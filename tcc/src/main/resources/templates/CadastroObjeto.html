@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" 
+<html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:th=http://www.thymeleaf.org>
 <head>
 <meta charset="UTF-8" />
-<title>Barganha e leilão</title>
+<title>cadastro de objetos</title>
 <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css" />
 <link rel="stylesheet" type="text/css" href="/css/style.css" />
 </head>
@@ -11,18 +11,28 @@
 	<nav class="navbar navbar-inverse navbar-static-top">
 		<div class="container-fluid">
 			<div class="navbar-header">
-				<a class="navbar-brand" href="#"> <img alt="BarganhaLeilao"
+				<a class="navbar-brand" href="/"> <img alt="BarganhaLeilao"
 					src="/images/LogoBarganha.png" height="35" width="50">
 				</a>
+
 			</div>
+
+			<ul class="nav nav-tabs">
+				<li class="presentation"><a href="/produto/pesquisa">Pesquisa</a></li>
+				<li class="presentation"><a href="/cadastro/cliente">Cadastro
+						de Cliente</a></li>
+				<li class="presentation disabled"><a
+					href="/cadastroObjeto/novo">Cadastro de Objetos</a></li>
+			</ul>
 		</div>
 	</nav>
 
 	<form class="form-horizontal" method="POST" action="/cadastroObjeto">
-		<div class="alert alert-success" th:if="${!#strings.isEmpty(mensagem)}">
+		<div class="alert alert-success"
+			th:if="${!#strings.isEmpty(mensagem)}">
 			<span th:text="${mensagem}">Produto salvo com sucesso!</span>
 		</div>
-		
+
 		<div class="panel panel-default">
 			<div class="panel-heading">
 				<h1 class="panel-tittle">Cadastro de objetos</h1>
@@ -87,6 +97,7 @@
 
 		</div>
 	</form>
+	<script src="/js/jquery-3.6.0.min.js"></script>
 	<script src="/js/bootstrap.min.js"></script>
 </body>
 </html>
