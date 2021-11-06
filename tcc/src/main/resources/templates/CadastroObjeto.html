@@ -18,16 +18,17 @@
 			</div>
 
 			<ul class="nav nav-tabs">
-				<li class="presentation"><a href="/produto/pesquisa">Pesquisa</a></li>
 				<li class="presentation"><a href="/cadastro/cliente">Cadastro
 						de Cliente</a></li>
 				<li class="presentation disabled"><a
 					href="/cadastroObjeto/novo">Cadastro de Objetos</a></li>
+				<li class="presentation"><a href="/produto/pesquisa">Pesquisa</a></li>
 			</ul>
 		</div>
 	</nav>
 
-	<form class="form-horizontal" method="POST" action="/cadastroObjeto">
+	<form class="form-horizontal" method="POST" action="/cadastroObjeto"
+		enctype="multipart/form-data">
 		<div class="alert alert-success"
 			th:if="${!#strings.isEmpty(mensagem)}">
 			<span th:text="${mensagem}">Produto salvo com sucesso!</span>
@@ -35,7 +36,7 @@
 
 		<div class="panel panel-default">
 			<div class="panel-heading">
-				<h1 class="panel-tittle">Cadastro de objetos</h1>
+				<h1 class="panel-title">Cadastro de objetos</h1>
 			</div>
 
 			<div class="panel-body">
@@ -50,7 +51,9 @@
 				<div class="form-group">
 					<label for="Preco" class="col-sm-2 control-label">Preço:</label>
 					<div class="col-sm-4">
-						<input type="text" class="form-control" id="Preco" name=Preco />
+						<input type="number" min="0" step="any"
+							onkeyup="if(this.value<0){this.value= this.value * -1}"
+							class="form-control" id="Preco" name=Preco />
 					</div>
 				</div>
 
@@ -62,14 +65,14 @@
 					</div>
 				</div>
 				<div class="form-group">
-					<label for="imagem" class="col-sm-2 control-label">Imagem:</label>
-					<div class="imagem">
-						<!-- 
-						<div class="col-sm-offset-2">
-							<button type="submit" class="btn btn-primary">upload</button>
+					<div class="col-sm-9">
+						<div class="max-width">
+							<div class="imageContainer">
+								<img src="/images/LogoBarganha.png" alt="Selecione uma imagem"
+									id="imgPhoto" />
+							</div>
 						</div>
-						-->
-						<input type="file" class="col-sm-4 control-label" />
+						<input type="file" id="imagem" name="imagem" accept="image/*" />
 					</div>
 				</div>
 
@@ -97,6 +100,8 @@
 
 		</div>
 	</form>
+	<script src="/js/mascara.js"></script>
+	<script src="/js/script.js"></script>
 	<script src="/js/jquery-3.6.0.min.js"></script>
 	<script src="/js/bootstrap.min.js"></script>
 </body>

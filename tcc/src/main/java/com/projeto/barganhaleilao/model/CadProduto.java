@@ -1,5 +1,6 @@
 package com.projeto.barganhaleilao.model;
 
+import java.math.BigDecimal;
 import java.util.Objects;
 
 import javax.persistence.Entity;
@@ -8,58 +9,93 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.validation.constraints.DecimalMax;
+import javax.validation.constraints.DecimalMin;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
+import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.format.annotation.NumberFormat;
 
 @Entity
 public class CadProduto {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private long Codigo;
-	private String Produto;
-	
+	private long codigo;
+
+	@NotEmpty(message = "Nome do produto é obrigatório.")
+	@Size(max = 30, message = "Descrição tem que ter no máximo 30 caracteres")
+	private String produto;
+
+	@NotNull(message = "Preço é obrigatório.")
+	@DecimalMin(value = "0.01", message = "Preço não pode ser menor que 0,01")
+	@DecimalMax(value = "9999999.99", message = "Preço não pode ser maior que 9999999.99")
 	@NumberFormat(pattern = "#,##0.00")
-	private double Preco;
-	private String Descricao;
-	
+	private BigDecimal preco;
+
+	@NotEmpty(message = "Descrição é obrigatória.")
+	@Size(max = 60, message = "Descrição tem que ter no máximo 60 caracteres")
+	private String descricao;
+
 	@Enumerated(EnumType.STRING)
-	private StatusVenda Status;
-	
+	private StatusVenda status;
+
+	private String caminho;
+
+	public String getCaminho() {
+		return caminho;
+	}
+
+	public void setCaminho(String caminho) {
+		this.caminho = caminho;
+	}
+
 	public long getCodigo() {
-		return Codigo;
+		return codigo;
 	}
+
 	public void setCodigo(long codigo) {
-		Codigo = codigo;
+		this.codigo = codigo;
 	}
+
 	public String getProduto() {
-		return Produto;
+		return produto;
 	}
+
 	public void setProduto(String produto) {
-		Produto = produto;
+		this.produto = produto;
 	}
-	public double getPreco() {
-		return Preco;
+
+	public BigDecimal getPreco() {
+		return preco;
 	}
-	public void setPreco(double preco) {
-		Preco = preco;
+
+	public void setPreco(BigDecimal preco) {
+		this.preco = preco;
 	}
+
 	public String getDescricao() {
-		return Descricao;
+		return descricao;
 	}
+
 	public void setDescricao(String descricao) {
-		Descricao = descricao;
+		this.descricao = descricao;
 	}
+
 	public StatusVenda getStatus() {
-		return Status;
+		return status;
 	}
+
 	public void setStatus(StatusVenda status) {
-		Status = status;
+		this.status = status;
 	}
+
 	@Override
 	public int hashCode() {
-		return Objects.hash(Codigo);
+		return Objects.hash(codigo);
 	}
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -69,8 +105,7 @@ public class CadProduto {
 		if (getClass() != obj.getClass())
 			return false;
 		CadProduto other = (CadProduto) obj;
-		return Codigo == other.Codigo;
+		return codigo == other.codigo;
 	}
 
-	
 }

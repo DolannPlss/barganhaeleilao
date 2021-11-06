@@ -31,10 +31,6 @@ public class CadastroClientesController {
 	}
 	
 	
-	
-	
-	
-	
 	@RequestMapping(value="/pesquisa", method=RequestMethod.GET)
 	public ModelAndView pesquisaCliente(Clientes clientes) {
 		ModelAndView mv = new ModelAndView("PesquisaClientes");
@@ -42,4 +38,6 @@ public class CadastroClientesController {
 		mv.addObject("clientes", todosClientes);
 		return mv;
 	}
+	
+
 }
